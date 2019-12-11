@@ -1,23 +1,23 @@
 let gMemes,
-  id = 1,
-  gSearchWord='';
+  memeId = 1,
+  gSearchWord = "";
 
-
-  function init(){
-      CreateMemes()
-      renderMemes()
-  }
+function init() {
+  CreateMemes();
+  renderMemes();
+}
 
 function CreateMeme(keywords) {
   return {
-      url: `meme-imgs(square)/${id}.jpg`,
-      id: id++,
+    url: `meme-imgs(square)/${memeId}.jpg`,
+    id: memeId++,
     keywords: keywords
   };
 }
 
 function CreateMemes() {
-  gMemes = [CreateMeme("kid"),
+  gMemes = [
+    CreateMeme("kid"),
     CreateMeme("tell me more"),
     CreateMeme("kid"),
     CreateMeme("Aliens"),
@@ -34,15 +34,16 @@ function CreateMemes() {
     CreateMeme("cute"),
     CreateMeme("putin"),
     CreateMeme("obama"),
-    CreateMeme("gay")]
+    CreateMeme("gay")
+  ];
 }
 
-function changeGSearchWord(value){
-   return gSearchWord=value
+function changeGSearchWord(value) {
+  return (gSearchWord = value);
 }
 
-function filterMemes(){
-return gMemes.filter(meme=>{
-return meme.keywords.includes(gSearchWord)
-})
+function filterMemes() {
+  return gMemes.filter(meme => {
+    return meme.keywords.includes(gSearchWord);
+  });
 }

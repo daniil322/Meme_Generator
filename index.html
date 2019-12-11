@@ -30,7 +30,13 @@
 </content>
 </main>
     <editor>
-    <canvas width="500px" height="500px"></canvas>
+    <canvas ondrag="gDragMode()"  ondragleave="checkClick(event)" onclick="checkClick(event)" width="500px" height="500px"></canvas>
+    <div class="flexCoulmn">
+        <input name="text" class="text" type="text" oninput="changeDraw(this)" >
+        <input name="color" class="color" type="color" onchange="changeDraw(this)">
+        <button name="fontUp"  onclick="changeDraw(this)">fontUp</button>
+        <button name="fontDown" onclick="changeDraw(this)">FontDown</button>
+    </div>
     </editor>
     <script src="js/mainGallery.js"></script>
     <script src="js/mainGalleryController.js"></script>
