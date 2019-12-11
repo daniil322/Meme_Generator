@@ -30,7 +30,7 @@
 </content>
 </main>
     <editor>
-    <canvas   onmouseup="checkClick(event)" onclick="checkClick(event)"width="500px" height="500px"></canvas>
+    <canvas onmousedown="checkClick(event)" onmousemove="moveTo(event)" onmouseout="exitDragMode()" onmouseup="exitDragMode()" onclick="checkClick(event)"width="500px" height="500px"></canvas>
     <div class="flexCoulmn">
         <input name="text" class="text" type="text" oninput="changeDraw(this)" >
         <input name="color" class="color" type="color" onchange="changeDraw(this)">
@@ -39,10 +39,23 @@
         <button name="fontDown" onclick="changeDraw(this)">FontDown</button>
         <button onclick="deleteDraw()" >Delete</button>
         <button onclick="addLine()" name='addLine'>Add Line</button>
+        <form
+        action=""
+        method="POST"
+        enctype="multipart/form-data"
+        onsubmit="uploadImg(this, event)"
+      >
+        <input name="img" id="imgData" type="hidden" />
+        <button class="btn" type="submit">Publish</button>
+        <div class="share-container"></div>
+      </form>
+        
+        <a href="#" onclick="downloadCanvas(this)">Download</a>
     </div>
     </editor>
     <script src="js/mainGallery.js"></script>
     <script src="js/mainGalleryController.js"></script>
     <script src="js/canvas.js"></script>
+    <script src="js/canvasUpload.js"></script>
 </body>
 </html>
