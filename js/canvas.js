@@ -11,13 +11,12 @@ function canvasImage(memeURL) {
   base_image.src = memeURL;
   base_image.onload = function() {
     ctx.drawImage(base_image, 0, 0);
-    canvasWrite();
   };
 }
 function canvasWrite(
-  txt = "hello",
+  txt,
   textSize = 50,
-  color = "#000000",
+  color = "#FFFFFF",
   x = 180,
   y = 80,
   stroke = "#000000",
@@ -45,6 +44,7 @@ function canvasWrite(
 }
 
 function changeDraw(elInput) {
+  if (!gCanvasDraws[gCurrClickedIDX]) return;
   let fontSize = gCanvasDraws[gCurrClickedIDX].textSize;
   switch (elInput.name) {
     case "borderColor":
@@ -105,8 +105,8 @@ function checkClick(ev) {
   gCanvasDraws.forEach(draw => {
     if (
       x < draw.x + draw.wordWidth &&
-      y < draw.y &&
-      x > draw.x &&
+      y < draw.y + draw.wordHeight / 2 &&
+      x > draw.x - draw.wordWidth / 2 &&
       y > draw.y - draw.wordHeight / 2
     ) {
       document.querySelector(".text").value = draw.txt;
@@ -122,7 +122,7 @@ function deleteDraw() {
   drawCanvas();
 }
 function addLine() {
-  canvasWrite("hi", 50, "", 200, 200);
+  canvasWrite("hello", 50, "#FFFFFF", 200, 200);
   gCurrClickedIDX = gCanvasDraws.length - 1;
 }
 
@@ -135,4 +135,5 @@ function downloadCanvas(elDownload) {
   elDownload.download = "my-image.png";
   elDownload.href = image;
   elDownload.click();
+  uploadToLocalStorage(href)
 }

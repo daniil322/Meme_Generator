@@ -27,3 +27,17 @@ function uploadImg(elForm, ev) {
         console.error(err);
       });
   }
+
+
+  function uploadToLocalStorage(href){
+    localStorage.setItem("imgCanvas",href)
+  }
+
+  function getFromLocalStorage(){
+    var img=new Image();
+img.onload=function(){
+    ctx.drawImage(img,0,0);
+    gCanvasDraws
+}
+img.src=localStorage.getItem("imgCanvas");
+  }
