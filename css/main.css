@@ -20,7 +20,7 @@ header {
 
 /* nav */
 
-.checkbox{
+.checkbox {
   position: absolute;
   top: -9999px;
   left: -9999px;
@@ -36,7 +36,7 @@ nav {
   width: 50%;
   margin-left: 30%;
 }
-.closeNav{
+.closeNav {
   display: none;
 }
 ul {
@@ -86,7 +86,7 @@ main {
   height: 85vh;
 }
 canvas {
-  margin-top: 14vh;
+  margin-top: 15vh;
   width: 100%;
   height: 100%;
 }
@@ -139,7 +139,10 @@ div button {
   background: inherit;
   height: 10vh;
 }
-
+/* ready MEMES */
+.readyMemes {
+  margin-top: 17vh;
+}
 /* about */
 .marginTop {
   margin-top: 16vh;
@@ -151,7 +154,7 @@ about {
   border-radius: 60%;
   margin-top: 16vh;
 }
-#showMenu:checked~.navcenter {
+#showMenu:checked ~ .navcenter {
   display: flex;
   flex-direction: column;
 }
@@ -168,20 +171,20 @@ about {
   }
 }
 @media screen and (max-width: 700px) {
-  .nav{
+  .nav {
     padding: 2%;
   }
-  ul.navCenter{
+  ul.navCenter {
     display: none;
   }
-  
-  nav{
+
+  nav {
     margin-left: 68%;
   }
-  .checkbox[type=checkbox]:checked .navcenter{
-display: flex;
+  .checkbox[type="checkbox"]:checked .navcenter {
+    display: flex;
   }
-  .callNav{
+  .callNav {
     display: flex;
     font-size: 3.5rem;
   }
@@ -230,7 +233,7 @@ display: flex;
   height: 40px;
   border-radius: 40px;
   padding: 10px;
-  margin-top: 20vh;
+  margin-top: 21vh;
 }
 .searchBox:hover {
   background-color: whitesmoke;
@@ -278,24 +281,23 @@ display: flex;
     width: 150px;
     padding: 0 6px;
   }
-  nav{
+  nav {
     margin-left: 55%;
   }
 }
 
-@media screen and (max-width:700px){
-  .editor{
+@media screen and (max-width: 700px) {
+  .editor {
     flex-direction: column;
   }
-  .form{
+  .form {
     margin: 0;
   }
-  canvas{
+  canvas {
     width: 200px;
     height: 200px;
   }
 }
-
 
 /* search buttons */
 
@@ -303,7 +305,6 @@ display: flex;
   padding: 0;
   list-style-type: none;
 }
-
 
 .quickSearch {
   background-color: rgba(255, 245, 245, 0.623);

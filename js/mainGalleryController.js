@@ -40,6 +40,15 @@ function showGallery() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   renderMemes()
 }
+function showMemes() {
+  gSearchWord=''
+  document.querySelector("editor").style.display = "none";
+  document.querySelector("main").style.display = "none";
+  document.querySelector("about").style.display = "none";
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  document.querySelector("mems").style.display = "flex";
+  renderMemesPage()
+}
 
 function showNav(){
   document.querySelector('.callNav').style.display='none'

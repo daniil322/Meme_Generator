@@ -10,14 +10,14 @@
 <body onload="init()">
 <header>
     <div class="logo-container flex justifyAround">
-        <img onclick="showGallery()" class="title-logo" src="/img/logo.png" alt="">
+        <img onclick="showGallery()" class="title-logo" src="img/logo.png" alt="">
     </logo>
     <nav>
         <p  class="callNav" onclick="showNav()" for="showMenu">☰</p>
         <label class="closeNav" onclick="hideNav()">X</label>
     <ul class="flex navCenter">
         <li onclick="showGallery()" class="nav textCenter">Gallery</li>
-        <li class="nav textCenter">Memes</li>
+        <li onclick="showMemes()" class="nav textCenter">Memes</li>
         <li onclick="showAbout()" class="nav  textCenter"> About</li>
     </ul>
     </nav>
@@ -73,8 +73,8 @@
         <div class="margin font flex flexCoulmn ">
                 <h2>Font size</h2>
                 <div class="flex spaceEvenly">
-        <button class=" button" name="fontUp"  onclick="changeDraw(this)">↑</button>
-        <button class="button" name="fontDown" onclick="changeDraw(this)">↓</button>
+        <p class=" button" name="fontUp"  onclick="changeDraw(this)">&#x1f5da;</button>
+        <p class="button" name="fontDown" onclick="changeDraw(this)">&#x1f5db;</button>
     </div>
 </div>
 <div class="directions">
@@ -90,7 +90,7 @@
     </div>
 </div>
 </div>
-    <div class="flex flex-wrap">
+    <div class="flex flex-wrap endButtons">
         <button class="quickSearch delete" onclick="deleteDraw()" >Delete</button>
         <button class="quickSearch" onclick="addLine()" name='addLine'>Add Line</button>
         <form
@@ -107,12 +107,19 @@
     </form>  
 </div>
 </editor>
+<mems>
+    <div class="readyMemes">
+
+    </div>
+
+</mems>
             <about>
                 <img class="photo" src="img/Yoda.jpg">
                 <p class="marginTop">My name is Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo quibusdam dolor, inventore voluptatem unde soluta dolorum animi voluptatibus, ex, atque quidem cupiditate veritatis deserunt repellendus maxime nobis sint culpa laudantium.</p>
             </about>
     <script src="js/mainGallery.js"></script>
     <script src="js/mainGalleryController.js"></script>
+    <script src="js/memsPage.js"></script>
     <script src="js/canvas.js"></script>
     <script src="js/canvasUpload.js"></script>
 </body>

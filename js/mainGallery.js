@@ -4,9 +4,9 @@ let gMemes,
 
 function init() {
   CreateMemes();
-  showGallery()
+  showGallery();
   window.addEventListener("resize", () => {
-    hideNav()
+    hideNav();
   });
 }
 

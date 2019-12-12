@@ -6,9 +6,7 @@ let canvas = document.querySelector("canvas"),
   gDragWords = false,
   gDragMode = false,
   gWidth = 500,
-  gHeight = 500,
-  gOriginal=0,
-  gNotOriginal=0
+  gHeight = 500;
 
 function canvasImage(memeURL) {
   gCanvasDraws = [];
@@ -102,14 +100,6 @@ function drawCanvas() {
   gCanvasDraws.forEach(draw => {
     let temp = draw.type;
     let y = draw.y;
-    if (gOriginal&& gWidth===300) {
-      gOriginal=0
-      draw.y=y+150
-    }
-    if (gNotOriginal&& gWidth===300) {
-      gNotOriginal=0
-      draw.y=y-150
-    }
     temp(draw.txt, draw.textSize, draw.color, draw.x, y, draw.stroke, draw.id);
   });
   gCanvasDraws.splice(0, gCanvasDraws.length / 2);
@@ -129,8 +119,6 @@ function moveTo(ev) {
 function checkClick(ev) {
   let x = ev.offsetX;
   let y = ev.offsetY;
-  let chosen=false
-  console.log(x,y)
   gCanvasDraws.forEach(draw => {
     if (
       x < draw.x + draw.wordWidth &&
@@ -141,8 +129,7 @@ function checkClick(ev) {
       gCurrClickedIDX = findLine(draw.id);
       gDragWords = findLine(draw.id);
       gDragMode = true;
-    showSlected(draw)
-      chosen=true
+      showSlected(draw);
     }
   });
 }
@@ -159,47 +146,41 @@ function exitDragMode() {
   gDragMode = false;
   gDragWords = false;
 }
-function downloadCanvas(elDownload) {
-  image = canvas.toDataURL("image/png", 1.0);
-  elDownload.download = "my-image.png";
-  elDownload.href = image;
-  uploadToLocalStorage(elDownload.href);
-}
+
 
 function findLine(id) {
   return gCanvasDraws.findIndex(draw => draw.id === id);
 }
-function nextWord(operator){
-  if (gCanvasDraws.length===1)return showSlected()
-  if (gCurrClickedIDX===0&&operator==='-') {
-    gCurrClickedIDX=gCanvasDraws.length-1
-    return showSlected()
+function nextWord(operator) {
+  if (gCanvasDraws.length === 1) return showSlected();
+  if (gCurrClickedIDX === 0 && operator === "-") {
+    gCurrClickedIDX = gCanvasDraws.length - 1;
+    return showSlected();
   }
-  switch(operator){
-    case '+':
-      gCurrClickedIDX++
+  switch (operator) {
+    case "+":
+      gCurrClickedIDX++;
       break;
-      default:
-        gCurrClickedIDX--
-    }
-    gCurrClickedIDX= gCurrClickedIDX%gCanvasDraws.length
-    showSlected()
+    default:
+      gCurrClickedIDX--;
+  }
+  gCurrClickedIDX = gCurrClickedIDX % gCanvasDraws.length;
+  showSlected();
 }
-function showSlected(draw=gCurrClickedIDX){
-  if (draw!==gCurrClickedIDX){
-    draw= findLine(draw.id)
+function showSlected(draw = gCurrClickedIDX) {
+  if (draw !== gCurrClickedIDX) {
+    draw = findLine(draw.id);
   }
   document.querySelector(".text").value = gCanvasDraws[draw].txt;
-      document.querySelector(".color").value = gCanvasDraws[draw].color;
-      let temp = gCanvasDraws[draw].color;
-      gCanvasDraws[draw].color = "#000";
-      drawCanvas();
-      setTimeout(() => {
-        gCanvasDraws[draw].color = temp;
-        drawCanvas();
-      }, 500);
+  document.querySelector(".color").value = gCanvasDraws[draw].color;
+  let temp = gCanvasDraws[draw].color;
+  gCanvasDraws[draw].color = "#000";
+  drawCanvas();
+  setTimeout(() => {
+    gCanvasDraws[draw].color = temp;
+    drawCanvas();
+  }, 500);
 }
-
 
 function windowSize() {
   if (window.innerWidth < 700) {
@@ -207,18 +188,16 @@ function windowSize() {
     gHeight = 200;
     canvas.width = 200;
     canvas.height = 200;
-   
-  } else if (window.innerWidth<900){
+  } else if (window.innerWidth < 900) {
     gWidth = 300;
     gHeight = 300;
     canvas.width = 300;
     canvas.height = 300;
-  } else{
+  } else {
     gWidth = 500;
     gHeight = 500;
     canvas.width = 500;
     canvas.height = 500;
   }
-  drawCanvas()
-
+  drawCanvas();
 }
