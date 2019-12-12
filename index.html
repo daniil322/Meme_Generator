@@ -14,9 +14,9 @@
     </logo>
     <nav>
     <ul class="flex ">
-        <li class="textCenter">Gallery</li>
+        <li onclick="showGallery()" class="textCenter">Gallery</li>
         <li class="textCenter">Memes</li>
-        <li class="textCenter"> About</li>
+        <li onclick="showAbout()" class="textCenter"> About</li>
     </ul>
     </nav>
 </header>
@@ -31,12 +31,20 @@
 </main>
     <editor>
     <canvas onmousedown="checkClick(event)" onmousemove="moveTo(event)" onmouseout="exitDragMode()" onmouseup="exitDragMode()" width="500px" height="500px"></canvas>
-    <div class="flexCoulmn">
-        <input name="text" class="text" type="text" oninput="changeDraw(this)" >
+    <div class="form flexCoulmn">
+        <h2>Enter Text</h2>
+        <input name="text" placeholder="Click on the word" class="text" type="text" oninput="changeDraw(this)" >
+        <h2>Choose a color for the words</h2>
         <input name="color" class="color" type="color" onchange="changeDraw(this)">
-        <input name="borderColor" class="color" type="color" onchange="changeDraw(this)">
-        <button name="fontUp"  onclick="changeDraw(this)">fontUp</button>
-        <button name="fontDown" onclick="changeDraw(this)">FontDown</button>
+        <h2>Choose the outline color</h2>
+        <input class="color" name="borderColor" class="color" type="color" onchange="changeDraw(this)">
+        <h2>Font size</h2>
+        <div class="font flex justifyAround">
+    
+        <button class="button" name="fontUp"  onclick="changeDraw(this)">↑</button>
+        <button class="button" name="fontDown" onclick="changeDraw(this)">↓</button>
+    </div>
+    <div class="flex">
         <button onclick="deleteDraw()" >Delete</button>
         <button onclick="addLine()" name='addLine'>Add Line</button>
         <form
@@ -45,14 +53,18 @@
         enctype="multipart/form-data"
         onsubmit="uploadImg(this, event)"
       >
+    </div>
       <input name="img" id="imgData" type="hidden" />
       <button class="btn" type="submit">Publish</button>
-      <div class="share-container"></div>
-    </form>
-    <a href="#" onclick="downloadCanvas(this)">Download</a>
-        
-    </div>
-    </editor>
+      <div class="flex share-container">
+      </div>
+    </form>  
+</div>
+</editor>
+            <about>
+                <img class="photo" src="img/Yoda.jpg">
+                <p>My name is Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo quibusdam dolor, inventore voluptatem unde soluta dolorum animi voluptatibus, ex, atque quidem cupiditate veritatis deserunt repellendus maxime nobis sint culpa laudantium.</p>
+            </about>
     <script src="js/mainGallery.js"></script>
     <script src="js/mainGalleryController.js"></script>
     <script src="js/canvas.js"></script>

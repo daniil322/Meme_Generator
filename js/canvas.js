@@ -7,10 +7,12 @@ let canvas = document.querySelector("canvas"),
   gDragMode = false;
 
 function canvasImage(memeURL) {
+    gCanvasDraws = []
   base_image = new Image();
   base_image.src = memeURL;
   base_image.onload = function() {
     ctx.drawImage(base_image, 0, 0);
+  canvasWrite("hello", 50, "#FFFFFF", 200, 200);
   };
 }
 function canvasWrite(
@@ -85,8 +87,8 @@ function drawCanvas() {
       draw.stroke,
       draw.id
     );
-    gCanvasDraws.pop();
-  });
+});
+gCanvasDraws.splice(0,gCanvasDraws.length/2);
 }
 function moveTo(ev) {
   if (gDragWords === false) return;
@@ -111,6 +113,13 @@ function checkClick(ev) {
     ) {
       document.querySelector(".text").value = draw.txt;
       document.querySelector(".color").value = draw.color;
+      let temp=draw.color
+      draw.color='red'
+      drawCanvas()
+      setTimeout(() => {
+        gCanvasDraws[gCurrClickedIDX].color= temp
+        drawCanvas()
+      }, 500);
       gCurrClickedIDX = findLine(draw.id);
       gDragWords = findLine(draw.id);
       gDragMode = true;

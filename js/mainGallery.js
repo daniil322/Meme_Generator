@@ -44,6 +44,7 @@ function changeGSearchWord(value) {
 
 function filterMemes() {
   return gMemes.filter(meme => {
-    return meme.keywords.includes(gSearchWord);
+    return meme.keywords.includes(gSearchWord.toLocaleLowerCase());
   });
 }
+
