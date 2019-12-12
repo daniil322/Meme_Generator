@@ -10,19 +10,34 @@
 <body onload="init()">
 <header>
     <div class="logo-container flex justifyAround">
-        <img class="title-logo" src="/img/logo.png" alt="">
+        <img onclick="showGallery()" class="title-logo" src="/img/logo.png" alt="">
     </logo>
     <nav>
     <ul class="flex ">
-        <li onclick="showGallery()" class="textCenter">Gallery</li>
-        <li class="textCenter">Memes</li>
-        <li onclick="showAbout()" class="textCenter"> About</li>
+        <li onclick="showGallery()" class="nav textCenter">Gallery</li>
+        <li class="nav textCenter">Memes</li>
+        <li onclick="showAbout()" class="nav  textCenter"> About</li>
     </ul>
     </nav>
 </header>
 <main>
-    <div class="flex ">
-    <input type="search" placeholder="search" oninput="searchMemes(this)">
+    <div class="flex flex-wrap">
+            <div class="searchBox">
+
+                    <input class="searchInput"type="text" name=""oninput="searchMemes(this)" placeholder="Search">
+                    <button class="searchButton" href="#">
+                        <i class="material-icons">
+                        </i>
+                    </button>
+                </div>
+            <ul class="flex list">
+                <li class="quickSearch"  onclick="searchMemes('cute')" >cute</li>
+                <li class="quickSearch" onclick="searchMemes('toy')" >toy</li>
+                <li class="quickSearch" onclick="searchMemes('kid')" >kid</li>
+                <li class="quickSearch" onclick="searchMemes('adult')" >adult</li>
+                <li class="quickSearch" onclick="searchMemes('putin')" >putin</li>
+                <li class="quickSearch" onclick="searchMemes('obama')" >obama</li>
+            </ul>
 </div>
 <content>
     <div class="content flex flex-wrap">
@@ -31,22 +46,51 @@
 </main>
     <editor>
     <canvas onmousedown="checkClick(event)" onmousemove="moveTo(event)" onmouseout="exitDragMode()" onmouseup="exitDragMode()" width="500px" height="500px"></canvas>
-    <div class="form flexCoulmn">
+    <div class="form flexCoulmn flex-wrap">
+        <div class="flex flexCoulmn">
         <h2>Enter Text</h2>
-        <input name="text" placeholder="Click on the word" class="text" type="text" oninput="changeDraw(this)" >
-        <h2>Choose a color for the words</h2>
-        <input name="color" class="color" type="color" onchange="changeDraw(this)">
-        <h2>Choose the outline color</h2>
-        <input class="color" name="borderColor" class="color" type="color" onchange="changeDraw(this)">
-        <div class="font flex justifyAround">
-            <div class="flexColumn">
-        <button class="button" name="fontUp"  onclick="changeDraw(this)">↑</button>
+        <input name="text" class="text width25" placeholder="Click on the word" class="text" type="text" oninput="changeDraw(this)" >
+        <div class=" font directions flexCoulmn ">
+                <h2>Word Selector</h2>
+                <div class="flex justifyAround">
+        <button class="width13 button"   onclick="nextWord('+')">↑</button>
+        <button class="width13 button" onclick="nextWord('-')">↓</button>
+</div>
+</div>    
+    </div>
+        <div class="flex spaceEvenly flex-wrap">
+           <div class="margin flex flexCoulmn">
+        <h2>Words Color</h2>
+        <input name=" color" class="color" type="color" onchange="changeDraw(this)">
+    </div>
+    <div class="margin flex flexCoulmn">
+
+        <h2>outline color</h2>
+        <input class=" color" name="borderColor" class="color" type="color" onchange="changeDraw(this)">
+    </div>
+        <div class="margin font flex flexCoulmn ">
+                <h2>Font size</h2>
+                <div class="flex spaceEvenly">
+        <button class=" button" name="fontUp"  onclick="changeDraw(this)">↑</button>
         <button class="button" name="fontDown" onclick="changeDraw(this)">↓</button>
     </div>
-        </div>
-    <div class="flex">
-        <button onclick="deleteDraw()" >Delete</button>
-        <button onclick="addLine()" name='addLine'>Add Line</button>
+</div>
+<div class="directions">
+            <div class="flex flexCoulmn">
+                <h2>change Position</h2>
+                <div class="flex spaceEvenly">
+        <button class=" button" name="left"  onclick="changeDraw(this)" onkeydown="changeDraw(this)">←</button>
+        <button class="button" name="right" onclick="changeDraw(this)" onkeydown="changeDraw(this)">→</button>
+        <button class="button" name="up"  onclick="changeDraw(this)" onkeydown="changeDraw(this)">↑</button>
+        <button class="button" name="down" onkeydown="changeDraw(this)" onclick="changeDraw(this)">↓</button>
+</div>
+
+    </div>
+</div>
+</div>
+    <div class="flex flex-wrap">
+        <button class="quickSearch delete" onclick="deleteDraw()" >Delete</button>
+        <button class="quickSearch" onclick="addLine()" name='addLine'>Add Line</button>
         <form
         action=""
         method="POST"
@@ -55,7 +99,7 @@
       >
     </div>
       <input name="img" id="imgData" type="hidden" />
-      <button class="btn" type="submit">Publish</button>
+      <button class="quickSearch" type="submit">Publish</button>
       <div class="flex share-container">
       </div>
     </form>  

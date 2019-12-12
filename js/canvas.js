@@ -6,7 +6,9 @@ let canvas = document.querySelector("canvas"),
   gDragWords = false,
   gDragMode = false,
   gWidth = 500,
-  gHeight = 500;
+  gHeight = 500,
+  gOriginal=0,
+  gNotOriginal=0
 
 function canvasImage(memeURL) {
   gCanvasDraws = [];
@@ -16,16 +18,6 @@ function canvasImage(memeURL) {
 
   window.addEventListener("resize", () => {
     windowSize();
-  });
-  canvas.addEventListener("touchstart", event => {
-    checkClick(event);
-  });
-  canvas.addEventListener("touchmove", event => {
-    moveTo(event);
-    event.stopPropagation();
-  });
-  canvas.addEventListener("touchend", event => {
-    exitDragMode(event);
   });
   base_image.onload = function() {
     ctx.drawImage(base_image, 0, 0, gWidth, gHeight);
@@ -65,6 +57,9 @@ function canvasWrite(
 function changeDraw(elInput) {
   if (!gCanvasDraws[gCurrClickedIDX]) return;
   let fontSize = gCanvasDraws[gCurrClickedIDX].textSize;
+  let x = gCanvasDraws[gCurrClickedIDX].x;
+  let y = gCanvasDraws[gCurrClickedIDX].y;
+
   switch (elInput.name) {
     case "borderColor":
       gCanvasDraws[gCurrClickedIDX].stroke = elInput.value;
@@ -76,12 +71,28 @@ function changeDraw(elInput) {
       gCanvasDraws[gCurrClickedIDX].color = elInput.value;
       break;
     case "fontUp":
-      fontSize++;
+      fontSize += 2;
       gCanvasDraws[gCurrClickedIDX].textSize = fontSize;
       break;
     case "fontDown":
-      fontSize--;
+      fontSize -= 2;
       gCanvasDraws[gCurrClickedIDX].textSize = fontSize;
+      break;
+    case "up":
+      y -= 2;
+      gCanvasDraws[gCurrClickedIDX].y = y;
+      break;
+    case "down":
+      y += 2;
+      gCanvasDraws[gCurrClickedIDX].y = y;
+      break;
+    case "right":
+      x += 2;
+      gCanvasDraws[gCurrClickedIDX].x = x;
+      break;
+    case "left":
+      x -= 2;
+      gCanvasDraws[gCurrClickedIDX].x = x;
       break;
   }
   drawCanvas();
@@ -91,7 +102,15 @@ function drawCanvas() {
   ctx.drawImage(base_image, 0, 0, gWidth, gHeight);
   gCanvasDraws.forEach(draw => {
     let temp = draw.type;
-    y = draw.y;
+    let y = draw.y;
+    if (gOriginal&& gWidth===300) {
+      gOriginal=0
+      draw.y=y+150
+    }
+    if (gNotOriginal&& gWidth===300) {
+      gNotOriginal=0
+      draw.y=y-150
+    }
     temp(draw.txt, draw.textSize, draw.color, draw.x, y, draw.stroke, draw.id);
   });
   gCanvasDraws.splice(0, gCanvasDraws.length / 2);
@@ -111,6 +130,7 @@ function moveTo(ev) {
 function checkClick(ev) {
   let x = ev.offsetX;
   let y = ev.offsetY;
+  console.log(x,y)
   gCanvasDraws.forEach(draw => {
     if (
       x < draw.x + draw.wordWidth &&
@@ -118,18 +138,10 @@ function checkClick(ev) {
       x > draw.x - draw.wordWidth / 2 &&
       y > draw.y - draw.wordHeight / 2
     ) {
-      document.querySelector(".text").value = draw.txt;
-      document.querySelector(".color").value = draw.color;
-      let temp = draw.color;
-      draw.color = "red";
-      drawCanvas();
-      setTimeout(() => {
-        gCanvasDraws[gCurrClickedIDX].color = temp;
-        drawCanvas();
-      }, 500);
       gCurrClickedIDX = findLine(draw.id);
       gDragWords = findLine(draw.id);
       gDragMode = true;
+      showSlected()
     }
   });
 }
@@ -157,6 +169,34 @@ function downloadCanvas(elDownload) {
 function findLine(id) {
   return gCanvasDraws.findIndex(draw => draw.id === id);
 }
+function nextWord(operator){
+  if (gCanvasDraws.length===1)return showSlected()
+  if (gCurrClickedIDX===0&&operator==='-') {
+    gCurrClickedIDX=gCanvasDraws.length-1
+    return showSlected()
+  }
+  switch(operator){
+    case '+':
+      gCurrClickedIDX++
+      break;
+      default:
+        gCurrClickedIDX--
+    }
+    gCurrClickedIDX= gCurrClickedIDX%gCanvasDraws.length
+    showSlected()
+}
+function showSlected(){
+  document.querySelector(".text").value = gCanvasDraws[gCurrClickedIDX].txt;
+      document.querySelector(".color").value = gCanvasDraws[gCurrClickedIDX].color;
+      let temp = gCanvasDraws[gCurrClickedIDX].color;
+      gCanvasDraws[gCurrClickedIDX].color = "red";
+      drawCanvas();
+      setTimeout(() => {
+        gCanvasDraws[gCurrClickedIDX].color = temp;
+        drawCanvas();
+      }, 500);
+}
+
 
 function windowSize() {
   if (window.innerWidth < 900) {
@@ -165,11 +205,13 @@ function windowSize() {
     canvas.width = 300;
     canvas.height = 300;
     drawCanvas();
+    gNotOriginal=1
   } else {
     gWidth = 500;
     gHeight = 500;
     canvas.width = 500;
     canvas.height = 500;
     drawCanvas();
+    gOriginal=1
   }
 }

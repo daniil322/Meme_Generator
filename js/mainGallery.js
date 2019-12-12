@@ -34,16 +34,18 @@ function CreateMemes() {
     CreateMeme("cute"),
     CreateMeme("putin"),
     CreateMeme("obama"),
-    CreateMeme("gay")
+    CreateMeme("adult")
   ];
 }
 
 function changeGSearchWord(value) {
+  
   return (gSearchWord = value);
 }
 
 function filterMemes() {
   return gMemes.filter(meme => {
+    if (!gSearchWord)return meme
     return meme.keywords.includes(gSearchWord.toLocaleLowerCase());
   });
 }
