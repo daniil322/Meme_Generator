@@ -4,15 +4,32 @@ let canvas = document.querySelector("canvas"),
   drawId = 1,
   gCurrClickedIDX = 0,
   gDragWords = false,
-  gDragMode = false;
+  gDragMode = false,
+  gWidth = 500,
+  gHeight = 500;
 
 function canvasImage(memeURL) {
-    gCanvasDraws = []
+  gCanvasDraws = [];
   base_image = new Image();
   base_image.src = memeURL;
+  windowSize();
+
+  window.addEventListener("resize", () => {
+    windowSize();
+  });
+  canvas.addEventListener("touchstart", event => {
+    checkClick(event);
+  });
+  canvas.addEventListener("touchmove", event => {
+    moveTo(event);
+    event.stopPropagation();
+  });
+  canvas.addEventListener("touchend", event => {
+    exitDragMode(event);
+  });
   base_image.onload = function() {
-    ctx.drawImage(base_image, 0, 0);
-  canvasWrite("hello", 50, "#FFFFFF", 200, 200);
+    ctx.drawImage(base_image, 0, 0, gWidth, gHeight);
+    canvasWrite("hello", 50, "#FFFFFF", 100, 100);
   };
 }
 function canvasWrite(
@@ -70,26 +87,16 @@ function changeDraw(elInput) {
   drawCanvas();
 }
 
-function findLine(id) {
-  return gCanvasDraws.findIndex(draw => draw.id === id);
-}
-
 function drawCanvas() {
-  ctx.drawImage(base_image, 0, 0);
+  ctx.drawImage(base_image, 0, 0, gWidth, gHeight);
   gCanvasDraws.forEach(draw => {
     let temp = draw.type;
-    temp(
-      draw.txt,
-      draw.textSize,
-      draw.color,
-      draw.x,
-      draw.y,
-      draw.stroke,
-      draw.id
-    );
-});
-gCanvasDraws.splice(0,gCanvasDraws.length/2);
+    y = draw.y;
+    temp(draw.txt, draw.textSize, draw.color, draw.x, y, draw.stroke, draw.id);
+  });
+  gCanvasDraws.splice(0, gCanvasDraws.length / 2);
 }
+
 function moveTo(ev) {
   if (gDragWords === false) return;
   let x = ev.offsetX;
@@ -113,12 +120,12 @@ function checkClick(ev) {
     ) {
       document.querySelector(".text").value = draw.txt;
       document.querySelector(".color").value = draw.color;
-      let temp=draw.color
-      draw.color='red'
-      drawCanvas()
+      let temp = draw.color;
+      draw.color = "red";
+      drawCanvas();
       setTimeout(() => {
-        gCanvasDraws[gCurrClickedIDX].color= temp
-        drawCanvas()
+        gCanvasDraws[gCurrClickedIDX].color = temp;
+        drawCanvas();
       }, 500);
       gCurrClickedIDX = findLine(draw.id);
       gDragWords = findLine(draw.id);
@@ -131,7 +138,7 @@ function deleteDraw() {
   drawCanvas();
 }
 function addLine() {
-  canvasWrite("hello", 50, "#FFFFFF", 200, 200);
+  canvasWrite("hello", 50, "#FFFFFF", 100, 100);
   gCurrClickedIDX = gCanvasDraws.length - 1;
 }
 
@@ -144,5 +151,25 @@ function downloadCanvas(elDownload) {
   elDownload.download = "my-image.png";
   elDownload.href = image;
   elDownload.click();
-  uploadToLocalStorage(href)
+  uploadToLocalStorage(href);
+}
+
+function findLine(id) {
+  return gCanvasDraws.findIndex(draw => draw.id === id);
+}
+
+function windowSize() {
+  if (window.innerWidth < 900) {
+    gWidth = 300;
+    gHeight = 300;
+    canvas.width = 300;
+    canvas.height = 300;
+    drawCanvas();
+  } else {
+    gWidth = 500;
+    gHeight = 500;
+    canvas.width = 500;
+    canvas.height = 500;
+    drawCanvas();
+  }
 }

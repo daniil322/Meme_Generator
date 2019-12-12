@@ -47,4 +47,3 @@ function filterMemes() {
     return meme.keywords.includes(gSearchWord.toLocaleLowerCase());
   });
 }
-

@@ -38,12 +38,12 @@
         <input name="color" class="color" type="color" onchange="changeDraw(this)">
         <h2>Choose the outline color</h2>
         <input class="color" name="borderColor" class="color" type="color" onchange="changeDraw(this)">
-        <h2>Font size</h2>
         <div class="font flex justifyAround">
-    
+            <div class="flexColumn">
         <button class="button" name="fontUp"  onclick="changeDraw(this)">↑</button>
         <button class="button" name="fontDown" onclick="changeDraw(this)">↓</button>
     </div>
+        </div>
     <div class="flex">
         <button onclick="deleteDraw()" >Delete</button>
         <button onclick="addLine()" name='addLine'>Add Line</button>
