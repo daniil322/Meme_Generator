@@ -91,7 +91,7 @@ canvas {
   height: 100%;
 }
 .directions {
-  display: none;
+  display: flex;
 }
 h2 {
   font-family: Bebas;
