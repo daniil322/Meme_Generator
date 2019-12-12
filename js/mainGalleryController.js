@@ -40,3 +40,25 @@ function showGallery() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   renderMemes()
 }
+
+function showNav(){
+  document.querySelector('.callNav').style.display='none'
+  document.querySelector('.navCenter').style.display='flex'
+  document.querySelector('.navCenter').style.flexDirection ='column'
+  document.querySelector('.closeNav').style.display ='inline-block'
+}
+
+function hideNav(){
+  if (window.innerWidth > 700){
+    document.querySelector('.callNav').style.display='none'
+    document.querySelector('.navCenter').style.display='flex'
+    document.querySelector('.closeNav').style.display ='none'
+
+ return   document.querySelector('.navCenter').style.flexDirection ='row'
+  }
+  document.querySelector('.callNav').style.display='flex'
+  document.querySelector('.navCenter').style.display='none'
+  document.querySelector('.navCenter').style.flexDirection ='row'
+  document.querySelector('.closeNav').style.display ='none'
+
+}

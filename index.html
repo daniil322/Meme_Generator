@@ -13,7 +13,9 @@
         <img onclick="showGallery()" class="title-logo" src="/img/logo.png" alt="">
     </logo>
     <nav>
-    <ul class="flex ">
+        <p  class="callNav" onclick="showNav()" for="showMenu">☰</p>
+        <label class="closeNav" onclick="hideNav()">X</label>
+    <ul class="flex navCenter">
         <li onclick="showGallery()" class="nav textCenter">Gallery</li>
         <li class="nav textCenter">Memes</li>
         <li onclick="showAbout()" class="nav  textCenter"> About</li>
@@ -30,7 +32,7 @@
                         </i>
                     </button>
                 </div>
-            <ul class="flex list">
+            <ul class="flex flex-wrap list">
                 <li class="quickSearch"  onclick="searchMemes('cute')" >cute</li>
                 <li class="quickSearch" onclick="searchMemes('toy')" >toy</li>
                 <li class="quickSearch" onclick="searchMemes('kid')" >kid</li>
@@ -44,24 +46,24 @@
     </div>
 </content>
 </main>
-    <editor>
+    <editor class="editor" >
     <canvas onmousedown="checkClick(event)" onmousemove="moveTo(event)" onmouseout="exitDragMode()" onmouseup="exitDragMode()" width="500px" height="500px"></canvas>
     <div class="form flexCoulmn flex-wrap">
         <div class="flex flexCoulmn">
         <h2>Enter Text</h2>
-        <input name="text" class="text width25" placeholder="Click on the word" class="text" type="text" oninput="changeDraw(this)" >
+        <input name="text" class="text width25" placeholder="Click on the word" class="marginTop" type="text" oninput="changeDraw(this)" >
+        </div>
         <div class=" font directions flexCoulmn ">
                 <h2>Word Selector</h2>
                 <div class="flex justifyAround">
         <button class="width13 button"   onclick="nextWord('+')">↑</button>
         <button class="width13 button" onclick="nextWord('-')">↓</button>
-</div>
 </div>    
     </div>
         <div class="flex spaceEvenly flex-wrap">
            <div class="margin flex flexCoulmn">
         <h2>Words Color</h2>
-        <input name=" color" class="color" type="color" onchange="changeDraw(this)">
+        <input name="color" class="color" type="color" onchange="changeDraw(this)">
     </div>
     <div class="margin flex flexCoulmn">
 
@@ -107,7 +109,7 @@
 </editor>
             <about>
                 <img class="photo" src="img/Yoda.jpg">
-                <p>My name is Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo quibusdam dolor, inventore voluptatem unde soluta dolorum animi voluptatibus, ex, atque quidem cupiditate veritatis deserunt repellendus maxime nobis sint culpa laudantium.</p>
+                <p class="marginTop">My name is Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo quibusdam dolor, inventore voluptatem unde soluta dolorum animi voluptatibus, ex, atque quidem cupiditate veritatis deserunt repellendus maxime nobis sint culpa laudantium.</p>
             </about>
     <script src="js/mainGallery.js"></script>
     <script src="js/mainGalleryController.js"></script>

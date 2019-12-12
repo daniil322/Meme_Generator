@@ -59,7 +59,6 @@ function changeDraw(elInput) {
   let fontSize = gCanvasDraws[gCurrClickedIDX].textSize;
   let x = gCanvasDraws[gCurrClickedIDX].x;
   let y = gCanvasDraws[gCurrClickedIDX].y;
-
   switch (elInput.name) {
     case "borderColor":
       gCanvasDraws[gCurrClickedIDX].stroke = elInput.value;
@@ -130,6 +129,7 @@ function moveTo(ev) {
 function checkClick(ev) {
   let x = ev.offsetX;
   let y = ev.offsetY;
+  let chosen=false
   console.log(x,y)
   gCanvasDraws.forEach(draw => {
     if (
@@ -141,7 +141,8 @@ function checkClick(ev) {
       gCurrClickedIDX = findLine(draw.id);
       gDragWords = findLine(draw.id);
       gDragMode = true;
-      showSlected()
+    showSlected(draw)
+      chosen=true
     }
   });
 }
@@ -162,8 +163,7 @@ function downloadCanvas(elDownload) {
   image = canvas.toDataURL("image/png", 1.0);
   elDownload.download = "my-image.png";
   elDownload.href = image;
-  elDownload.click();
-  uploadToLocalStorage(href);
+  uploadToLocalStorage(elDownload.href);
 }
 
 function findLine(id) {
@@ -185,33 +185,40 @@ function nextWord(operator){
     gCurrClickedIDX= gCurrClickedIDX%gCanvasDraws.length
     showSlected()
 }
-function showSlected(){
-  document.querySelector(".text").value = gCanvasDraws[gCurrClickedIDX].txt;
-      document.querySelector(".color").value = gCanvasDraws[gCurrClickedIDX].color;
-      let temp = gCanvasDraws[gCurrClickedIDX].color;
-      gCanvasDraws[gCurrClickedIDX].color = "red";
+function showSlected(draw=gCurrClickedIDX){
+  if (draw!==gCurrClickedIDX){
+    draw= findLine(draw.id)
+  }
+  document.querySelector(".text").value = gCanvasDraws[draw].txt;
+      document.querySelector(".color").value = gCanvasDraws[draw].color;
+      let temp = gCanvasDraws[draw].color;
+      gCanvasDraws[draw].color = "#000";
       drawCanvas();
       setTimeout(() => {
-        gCanvasDraws[gCurrClickedIDX].color = temp;
+        gCanvasDraws[draw].color = temp;
         drawCanvas();
       }, 500);
 }
 
 
 function windowSize() {
-  if (window.innerWidth < 900) {
+  if (window.innerWidth < 700) {
+    gWidth = 200;
+    gHeight = 200;
+    canvas.width = 200;
+    canvas.height = 200;
+   
+  } else if (window.innerWidth<900){
     gWidth = 300;
     gHeight = 300;
     canvas.width = 300;
     canvas.height = 300;
-    drawCanvas();
-    gNotOriginal=1
-  } else {
+  } else{
     gWidth = 500;
     gHeight = 500;
     canvas.width = 500;
     canvas.height = 500;
-    drawCanvas();
-    gOriginal=1
   }
+  drawCanvas()
+
 }

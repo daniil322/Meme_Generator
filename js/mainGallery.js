@@ -4,7 +4,10 @@ let gMemes,
 
 function init() {
   CreateMemes();
-  renderMemes();
+  showGallery()
+  window.addEventListener("resize", () => {
+    hideNav()
+  });
 }
 
 function CreateMeme(keywords) {
@@ -39,13 +42,12 @@ function CreateMemes() {
 }
 
 function changeGSearchWord(value) {
-  
   return (gSearchWord = value);
 }
 
 function filterMemes() {
   return gMemes.filter(meme => {
-    if (!gSearchWord)return meme
+    if (!gSearchWord) return meme;
     return meme.keywords.includes(gSearchWord.toLocaleLowerCase());
   });
 }

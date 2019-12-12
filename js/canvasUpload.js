@@ -11,7 +11,6 @@ function uploadImg(elForm, ev) {
              Share   
           </a>`;
     }
-  
     doUploadImg(elForm, onSuccess);
   }
   
@@ -32,7 +31,9 @@ function uploadImg(elForm, ev) {
 
 
   function uploadToLocalStorage(href){
-    localStorage.setItem("imgCanvas",href)
+  let canvass=  localStorage.getItem("imgCanvas")
+  canvass.push(href)
+    localStorage.setItem("imgCanvas",canvass)
   }
 
   function getFromLocalStorage(){
