@@ -8,66 +8,71 @@ function renderMemes() {
 }
 
 function searchMemes(elFilter) {
-  if (elFilter.type!=='text') {
-     changeGSearchWord(elFilter);
-   return renderMemes()
+  if (elFilter.type !== "text") {
+    changeGSearchWord(elFilter);
+    return renderMemes();
   }
   changeGSearchWord(elFilter.value);
   renderMemes();
 }
 
 function showEditor(memeURL) {
-  gSearchWord=''
+  gSearchWord = "";
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   document.querySelector("editor").style.display = "flex";
   document.querySelector("main").style.display = "none";
+  document.querySelector("mems").style.display = "none";
+  document.querySelector("about").style.display = "none";
   canvasImage(memeURL);
 }
 
 function showAbout() {
-  gSearchWord=''
+  gSearchWord = "";
   document.querySelector("editor").style.display = "none";
   document.querySelector("main").style.display = "none";
-  document.querySelector("about").style.display = "flex";
+  document.querySelector("about").style.display = "inline";
+  document.querySelector("mems").style.display = "none";
+
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 function showGallery() {
-  gSearchWord=''
+  gSearchWord = "";
   document.querySelector("editor").style.display = "none";
   document.querySelector("main").style.display = "block";
   document.querySelector("about").style.display = "none";
+  document.querySelector("mems").style.display = "none";
+
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  renderMemes()
+  renderMemes();
 }
 function showMemes() {
-  gSearchWord=''
+  gSearchWord = "";
   document.querySelector("editor").style.display = "none";
   document.querySelector("main").style.display = "none";
   document.querySelector("about").style.display = "none";
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   document.querySelector("mems").style.display = "flex";
-  renderMemesPage()
+  renderMemesPage();
 }
 
-function showNav(){
-  document.querySelector('.callNav').style.display='none'
-  document.querySelector('.navCenter').style.display='flex'
-  document.querySelector('.navCenter').style.flexDirection ='column'
-  document.querySelector('.closeNav').style.display ='inline-block'
+function showNav() {
+  document.querySelector(".callNav").style.display = "none";
+  document.querySelector(".navCenter").style.display = "flex";
+  document.querySelector(".navCenter").style.flexDirection = "column";
+  document.querySelector(".closeNav").style.display = "inline-block";
 }
 
-function hideNav(){
-  if (window.innerWidth > 700){
-    document.querySelector('.callNav').style.display='none'
-    document.querySelector('.navCenter').style.display='flex'
-    document.querySelector('.closeNav').style.display ='none'
+function hideNav() {
+  if (window.innerWidth > 700) {
+    document.querySelector(".callNav").style.display = "none";
+    document.querySelector(".navCenter").style.display = "flex";
+    document.querySelector(".closeNav").style.display = "none";
 
- return   document.querySelector('.navCenter').style.flexDirection ='row'
+    return (document.querySelector(".navCenter").style.flexDirection = "row");
   }
-  document.querySelector('.callNav').style.display='flex'
-  document.querySelector('.navCenter').style.display='none'
-  document.querySelector('.navCenter').style.flexDirection ='row'
-  document.querySelector('.closeNav').style.display ='none'
-
+  document.querySelector(".callNav").style.display = "flex";
+  document.querySelector(".navCenter").style.display = "none";
+  document.querySelector(".navCenter").style.flexDirection = "row";
+  document.querySelector(".closeNav").style.display = "none";
 }

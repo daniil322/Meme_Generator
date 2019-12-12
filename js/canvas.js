@@ -147,7 +147,6 @@ function exitDragMode() {
   gDragWords = false;
 }
 
-
 function findLine(id) {
   return gCanvasDraws.findIndex(draw => draw.id === id);
 }
