@@ -46,18 +46,21 @@
     </div>
 </content>
 </main>
-    <editor class="editor" >
+    <editor>
+        <div class="editor background flex marginTop">
     <canvas onmousedown="checkClick(event)" onmousemove="moveTo(event)" onmouseout="exitDragMode()" onmouseup="exitDragMode()" width="500px" height="500px"></canvas>
     <div class="form flexCoulmn flex-wrap">
+        <div class="flex flex-wrap">
         <div class="flex flexCoulmn">
         <h2>Enter Text</h2>
-        <input name="text" class="text width25" placeholder="Click on the word" class="marginTop" type="text" oninput="changeDraw(this)" >
+        <input name="text" class="text width75" placeholder="Click on the word" class="marginTop" type="text" oninput="changeDraw(this)" >
         </div>
         <div class=" font directions flexCoulmn ">
                 <h2>Word Selector</h2>
                 <div class="flex justifyAround">
-        <button class="width13 button"   onclick="nextWord('+')">↑</button>
-        <button class="width13 button" onclick="nextWord('-')">↓</button>
+        <button class="width37 button"   onclick="nextWord('+')">↑</button>
+        <button class="width37 button" onclick="nextWord('-')">↓</button>
+    </div>
 </div>    
     </div>
         <div class="flex spaceEvenly flex-wrap">
@@ -73,8 +76,8 @@
         <div class="margin font flex flexCoulmn ">
                 <h2>Font size</h2>
                 <div class="flex spaceEvenly">
-        <p class=" button" name="fontUp"  onclick="changeDraw(this)">&#x1f5da;</button>
-        <p class="button" name="fontDown" onclick="changeDraw(this)">&#x1f5db;</button>
+        <button class=" button" name="fontUp"  onclick="changeDraw(this)">&#x1f5da;</button>
+        <button class="button" name="fontDown" onclick="changeDraw(this)">&#x1f5db;</button>
     </div>
 </div>
 <div class="directions">
@@ -90,6 +93,7 @@
     </div>
 </div>
 </div>
+
     <div class="flex flex-wrap endButtons">
         <button class="quickSearch delete" onclick="deleteDraw()" >Delete</button>
         <button class="quickSearch" onclick="addLine()" name='addLine'>Add Line</button>
@@ -106,6 +110,7 @@
       </div>
     </form>  
 </div>
+</div>
 </editor>
 <mems class="hideReadyMemes">
     <div class="readyMemes">
@@ -113,7 +118,7 @@
     </div>
 
 </mems>
-            <about>
+            <about class="background">
                 <img class="photo" src="img/Yoda.jpg">
                 <p class="marginTop">My name is Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo quibusdam dolor, inventore voluptatem unde soluta dolorum animi voluptatibus, ex, atque quidem cupiditate veritatis deserunt repellendus maxime nobis sint culpa laudantium.</p>
             </about>

@@ -30,7 +30,7 @@ function showAbout() {
   gSearchWord = "";
   document.querySelector("editor").style.display = "none";
   document.querySelector("main").style.display = "none";
-  document.querySelector("about").style.display = "inline";
+  document.querySelector("about").style.display = "flex";
   document.querySelector("mems").style.display = "none";
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);

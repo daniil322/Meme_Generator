@@ -19,14 +19,13 @@ function canvasImage(memeURL) {
   });
   base_image.onload = function() {
     ctx.drawImage(base_image, 0, 0, gWidth, gHeight);
-    canvasWrite("hello", 50, "#FFFFFF", 100, 100);
   };
 }
 function canvasWrite(
   txt,
   textSize = 50,
   color = "#FFFFFF",
-  x = 180,
+  x = 50,
   y = 80,
   stroke = "#000000",
   id = drawId++
@@ -123,7 +122,7 @@ function checkClick(ev) {
     if (
       x < draw.x + draw.wordWidth &&
       y < draw.y + draw.wordHeight / 2 &&
-      x > draw.x - draw.wordWidth / 2 &&
+      x > draw.x &&
       y > draw.y - draw.wordHeight / 2
     ) {
       gCurrClickedIDX = findLine(draw.id);
@@ -150,7 +149,9 @@ function exitDragMode() {
 function findLine(id) {
   return gCanvasDraws.findIndex(draw => draw.id === id);
 }
+
 function nextWord(operator) {
+  if (gCanvasDraws.length === 0) return;
   if (gCanvasDraws.length === 1) return showSlected();
   if (gCurrClickedIDX === 0 && operator === "-") {
     gCurrClickedIDX = gCanvasDraws.length - 1;
@@ -166,6 +167,7 @@ function nextWord(operator) {
   gCurrClickedIDX = gCurrClickedIDX % gCanvasDraws.length;
   showSlected();
 }
+
 function showSlected(draw = gCurrClickedIDX) {
   if (draw !== gCurrClickedIDX) {
     draw = findLine(draw.id);
