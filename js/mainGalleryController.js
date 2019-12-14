@@ -17,8 +17,7 @@ function searchMemes(elFilter) {
 }
 
 function showEditor(memeURL) {
-  gSearchWord = "";
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  restartEditor();
   document.querySelector("editor").style.display = "flex";
   document.querySelector("main").style.display = "none";
   document.querySelector("mems").style.display = "none";
@@ -27,31 +26,24 @@ function showEditor(memeURL) {
 }
 
 function showAbout() {
-  gSearchWord = "";
   document.querySelector("editor").style.display = "none";
   document.querySelector("main").style.display = "none";
-  document.querySelector("about").style.display = "flex";
+  document.querySelector("about").style.display = "inline-block";
   document.querySelector("mems").style.display = "none";
-
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 function showGallery() {
-  gSearchWord = "";
   document.querySelector("editor").style.display = "none";
   document.querySelector("main").style.display = "block";
   document.querySelector("about").style.display = "none";
   document.querySelector("mems").style.display = "none";
 
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
   renderMemes();
 }
 function showMemes() {
-  gSearchWord = "";
   document.querySelector("editor").style.display = "none";
   document.querySelector("main").style.display = "none";
   document.querySelector("about").style.display = "none";
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
   document.querySelector("mems").style.display = "flex";
   renderMemesPage();
 }
@@ -68,11 +60,20 @@ function hideNav() {
     document.querySelector(".callNav").style.display = "none";
     document.querySelector(".navCenter").style.display = "flex";
     document.querySelector(".closeNav").style.display = "none";
-
     return (document.querySelector(".navCenter").style.flexDirection = "row");
   }
   document.querySelector(".callNav").style.display = "flex";
   document.querySelector(".navCenter").style.display = "none";
   document.querySelector(".navCenter").style.flexDirection = "row";
   document.querySelector(".closeNav").style.display = "none";
+}
+function restartEditor() {
+  gSearchWord = "";
+
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  document.querySelector(
+    ".endButtons"
+  ).innerHTML = `<button class="quickSearch delete" onclick="deleteDraw()" >Delete</button>
+  <button class="quickSearch" onclick="addLine()" name='addLine'>Add Line</button>
+`;
 }

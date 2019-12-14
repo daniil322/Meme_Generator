@@ -14,8 +14,8 @@
     </logo>
     <nav>
         <p  class="callNav" onclick="showNav()" for="showMenu">☰</p>
-        <label class="closeNav" onclick="hideNav()">X</label>
-    <ul class="flex navCenter">
+        <ul class="flex navCenter">
+            <label class="closeNav" onfclick="hideNav()">X</label>
         <li onclick="showGallery()" class="nav textCenter">Gallery</li>
         <li onclick="showMemes()" class="nav textCenter">Memes</li>
         <li onclick="showAbout()" class="nav  textCenter"> About</li>
@@ -97,13 +97,13 @@
     <div class="flex flex-wrap endButtons">
         <button class="quickSearch delete" onclick="deleteDraw()" >Delete</button>
         <button class="quickSearch" onclick="addLine()" name='addLine'>Add Line</button>
+    </div>
         <form
         action=""
         method="POST"
         enctype="multipart/form-data"
         onsubmit="uploadImg(this, event)"
       >
-    </div>
       <input name="img" id="imgData" type="hidden" />
       <button class="quickSearch" type="submit">Publish</button>
       <div class="flex share-container">
@@ -112,16 +112,19 @@
 </div>
 </div>
 </editor>
+
 <mems class="hideReadyMemes">
     <div class="readyMemes">
-
     </div>
-
 </mems>
-            <about class="background">
-                <img class="photo" src="img/Yoda.jpg">
-                <p class="marginTop">My name is Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo quibusdam dolor, inventore voluptatem unde soluta dolorum animi voluptatibus, ex, atque quidem cupiditate veritatis deserunt repellendus maxime nobis sint culpa laudantium.</p>
-            </about>
+
+<about class="background">
+ <div class="flex">
+     <img class="photo" src="img/Yoda.jpg">
+     <p class="marginTop">My name is Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo quibusdam dolor, inventore voluptatem unde soluta dolorum animi voluptatibus, ex, atque quidem cupiditate veritatis deserunt repellendus maxime nobis sint culpa laudantium.</p> 
+      </div>
+</about>
+
     <script src="js/mainGallery.js"></script>
     <script src="js/mainGalleryController.js"></script>
     <script src="js/memsPage.js"></script>
