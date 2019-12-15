@@ -37,7 +37,7 @@ function showGallery() {
   document.querySelector("main").style.display = "block";
   document.querySelector("about").style.display = "none";
   document.querySelector("mems").style.display = "none";
-
+  gSearchWord = "";
   renderMemes();
 }
 function showMemes() {
@@ -68,12 +68,6 @@ function hideNav() {
   document.querySelector(".closeNav").style.display = "none";
 }
 function restartEditor() {
-  gSearchWord = "";
-
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  document.querySelector(
-    ".endButtons"
-  ).innerHTML = `<button class="quickSearch delete" onclick="deleteDraw()" >Delete</button>
-  <button class="quickSearch" onclick="addLine()" name='addLine'>Add Line</button>
-`;
+  document.querySelector(".endButtons").innerHTML =''
 }

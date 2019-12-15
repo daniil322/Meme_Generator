@@ -15,7 +15,7 @@
     <nav>
         <p  class="callNav" onclick="showNav()" for="showMenu">☰</p>
         <ul class="flex navCenter">
-            <label class="closeNav" onfclick="hideNav()">X</label>
+            <label class="closeNav" onclick="hideNav()">X</label>
         <li onclick="showGallery()" class="nav textCenter">Gallery</li>
         <li onclick="showMemes()" class="nav textCenter">Memes</li>
         <li onclick="showAbout()" class="nav  textCenter"> About</li>
@@ -48,55 +48,41 @@
 </main>
     <editor>
         <div class="editor background flex marginTop">
-    <canvas onmousedown="checkClick(event)" onmousemove="moveTo(event)" onmouseout="exitDragMode()" onmouseup="exitDragMode()" width="500px" height="500px"></canvas>
+            <div>
+    <canvas ontouchmove='moveTo(event)' ontouchstart='checkClick(event)' ontouchend='exitDragMode()' onmousedown="checkClick(event)" onmousemove="moveTo(event)" onmouseout="exitDragMode()" onmouseup="exitDragMode()" width="500px" height="500px"></canvas>
+</div>
     <div class="form flexCoulmn flex-wrap">
         <div class="flex flex-wrap">
         <div class="flex flexCoulmn">
-        <h2>Enter Text</h2>
         <input name="text" class="text width75" placeholder="Click on the word" class="marginTop" type="text" oninput="changeDraw(this)" >
         </div>
-        <div class=" font directions flexCoulmn ">
-                <h2>Word Selector</h2>
-                <div class="flex justifyAround">
-        <button class="width37 button"   onclick="nextWord('+')">↑</button>
-        <button class="width37 button" onclick="nextWord('-')">↓</button>
-    </div>
-</div>    
     </div>
         <div class="flex spaceEvenly flex-wrap">
            <div class="margin flex flexCoulmn">
-        <h2>Words Color</h2>
-        <input name="color" class="color" type="color" onchange="changeDraw(this)">
+               <input name="color" id="color" class="color" type="color" onchange="changeDraw(this)">
+        <label class="colorTxt" for="color">🎨
+        </label>
     </div>
     <div class="margin flex flexCoulmn">
-
-        <h2>outline color</h2>
-        <input class=" color" name="borderColor" class="color" type="color" onchange="changeDraw(this)">
+        <label class="colorTxt" for="outline" class="colorTxt">🖌️</label>
+        <input id="outline" class=" color" name="borderColor" class="color" type="color" onchange="changeDraw(this)">
     </div>
-        <div class="margin font flex flexCoulmn ">
-                <h2>Font size</h2>
-                <div class="flex spaceEvenly">
+        <div class="margin  flex flexCoulmn ">
         <button class=" button" name="fontUp"  onclick="changeDraw(this)">&#x1f5da;</button>
+    </div>
+    <div class="margin  flex flexCoulmn ">
         <button class="button" name="fontDown" onclick="changeDraw(this)">&#x1f5db;</button>
     </div>
+        <div class="margin  flex flexCoulmn ">
+<h1 class="colorTxt" onclick="deleteDraw()" >🚮</h1>
 </div>
-<div class="directions">
-            <div class="flex flexCoulmn">
-                <h2>change Position</h2>
-                <div class="flex spaceEvenly">
-        <button class=" button" name="left"  onclick="changeDraw(this)" onkeydown="changeDraw(this)">←</button>
-        <button class="button" name="right" onclick="changeDraw(this)" onkeydown="changeDraw(this)">→</button>
-        <button class="button" name="up"  onclick="changeDraw(this)" onkeydown="changeDraw(this)">↑</button>
-        <button class="button" name="down" onkeydown="changeDraw(this)" onclick="changeDraw(this)">↓</button>
-</div>
-
-    </div>
+<div class="margin font flex flexCoulmn ">
+<h1 class="colorTxt button bluebackground" onclick="addLine()" name='addLine'>✚</h1>
 </div>
 </div>
 
-    <div class="flex flex-wrap endButtons">
-        <button class="quickSearch delete" onclick="deleteDraw()" >Delete</button>
-        <button class="quickSearch" onclick="addLine()" name='addLine'>Add Line</button>
+    <div class="flex flex-wrap justifyAround endButtons">
+       
     </div>
         <form
         action=""
@@ -129,6 +115,7 @@
     <script src="js/mainGalleryController.js"></script>
     <script src="js/memsPage.js"></script>
     <script src="js/canvas.js"></script>
+    <script src="js/canvasController.js"></script>
     <script src="js/canvasUpload.js"></script>
 </body>
 </html>

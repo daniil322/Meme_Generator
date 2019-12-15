@@ -8,19 +8,6 @@ let canvas = document.querySelector("canvas"),
   gWidth = 500,
   gHeight = 500;
 
-function canvasImage(memeURL) {
-  gCanvasDraws = [];
-  base_image = new Image();
-  base_image.src = memeURL;
-  windowSize();
-
-  window.addEventListener("resize", () => {
-    windowSize();
-  });
-  base_image.onload = function() {
-    ctx.drawImage(base_image, 0, 0, gWidth, gHeight);
-  };
-}
 function canvasWrite(
   txt,
   textSize = 50,
@@ -57,15 +44,6 @@ function changeDraw(elInput) {
   let x = gCanvasDraws[gCurrClickedIDX].x;
   let y = gCanvasDraws[gCurrClickedIDX].y;
   switch (elInput.name) {
-    case "borderColor":
-      gCanvasDraws[gCurrClickedIDX].stroke = elInput.value;
-      break;
-    case "text":
-      gCanvasDraws[gCurrClickedIDX].txt = elInput.value;
-      break;
-    case "color":
-      gCanvasDraws[gCurrClickedIDX].color = elInput.value;
-      break;
     case "fontUp":
       fontSize += 2;
       gCanvasDraws[gCurrClickedIDX].textSize = fontSize;
@@ -90,24 +68,22 @@ function changeDraw(elInput) {
       x -= 2;
       gCanvasDraws[gCurrClickedIDX].x = x;
       break;
+    default:
+      gCanvasDraws[gCurrClickedIDX][elInput.name] = elInput.value;
   }
   drawCanvas();
 }
 
-function drawCanvas() {
-  ctx.drawImage(base_image, 0, 0, gWidth, gHeight);
-  gCanvasDraws.forEach(draw => {
-    let temp = draw.type;
-    let y = draw.y;
-    temp(draw.txt, draw.textSize, draw.color, draw.x, y, draw.stroke, draw.id);
-  });
-  gCanvasDraws.splice(0, gCanvasDraws.length / 2);
-}
-
 function moveTo(ev) {
+  event.preventDefault();
   if (gDragWords === false) return;
   let x = ev.offsetX;
   let y = ev.offsetY;
+  if (x === undefined || y === undefined) {
+    x = ev.touches[0].clientX;
+    y = ev.touches[0].clientY;
+    y = y - canvas.offsetTop + scrollY;
+  }
   if (gDragMode) {
     gCanvasDraws[gDragWords].x = x;
     gCanvasDraws[gDragWords].y = y;
@@ -115,23 +91,6 @@ function moveTo(ev) {
   }
 }
 
-function checkClick(ev) {
-  let x = ev.offsetX;
-  let y = ev.offsetY;
-  gCanvasDraws.forEach(draw => {
-    if (
-      x < draw.x + draw.wordWidth &&
-      y < draw.y + draw.wordHeight / 2 &&
-      x > draw.x &&
-      y > draw.y - draw.wordHeight / 2
-    ) {
-      gCurrClickedIDX = findLine(draw.id);
-      gDragWords = findLine(draw.id);
-      gDragMode = true;
-      showSlected(draw);
-    }
-  });
-}
 function deleteDraw() {
   gCanvasDraws.splice(gCurrClickedIDX, 1);
   drawCanvas();
@@ -148,39 +107,6 @@ function exitDragMode() {
 
 function findLine(id) {
   return gCanvasDraws.findIndex(draw => draw.id === id);
-}
-
-function nextWord(operator) {
-  if (gCanvasDraws.length === 0) return;
-  if (gCanvasDraws.length === 1) return showSlected();
-  if (gCurrClickedIDX === 0 && operator === "-") {
-    gCurrClickedIDX = gCanvasDraws.length - 1;
-    return showSlected();
-  }
-  switch (operator) {
-    case "+":
-      gCurrClickedIDX++;
-      break;
-    default:
-      gCurrClickedIDX--;
-  }
-  gCurrClickedIDX = gCurrClickedIDX % gCanvasDraws.length;
-  showSlected();
-}
-
-function showSlected(draw = gCurrClickedIDX) {
-  if (draw !== gCurrClickedIDX) {
-    draw = findLine(draw.id);
-  }
-  document.querySelector(".text").value = gCanvasDraws[draw].txt;
-  document.querySelector(".color").value = gCanvasDraws[draw].color;
-  let temp = gCanvasDraws[draw].color;
-  gCanvasDraws[draw].color = "#000";
-  drawCanvas();
-  setTimeout(() => {
-    gCanvasDraws[draw].color = temp;
-    drawCanvas();
-  }, 500);
 }
 
 function windowSize() {
