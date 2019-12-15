@@ -52,22 +52,6 @@ function changeDraw(elInput) {
       fontSize -= 2;
       gCanvasDraws[gCurrClickedIDX].textSize = fontSize;
       break;
-    case "up":
-      y -= 2;
-      gCanvasDraws[gCurrClickedIDX].y = y;
-      break;
-    case "down":
-      y += 2;
-      gCanvasDraws[gCurrClickedIDX].y = y;
-      break;
-    case "right":
-      x += 2;
-      gCanvasDraws[gCurrClickedIDX].x = x;
-      break;
-    case "left":
-      x -= 2;
-      gCanvasDraws[gCurrClickedIDX].x = x;
-      break;
     default:
       gCanvasDraws[gCurrClickedIDX][elInput.name] = elInput.value;
   }
@@ -93,8 +77,11 @@ function moveTo(ev) {
 
 function deleteDraw() {
   gCanvasDraws.splice(gCurrClickedIDX, 1);
+  gCurrClickedIDX -= 1;
+  if (gCurrClickedIDX < 0) return (gCurrClickedIDX = 1);
   drawCanvas();
 }
+
 function addLine() {
   canvasWrite("hello", 50, "#FFFFFF", 100, 100);
   gCurrClickedIDX = gCanvasDraws.length - 1;

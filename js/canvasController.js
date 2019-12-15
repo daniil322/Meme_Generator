@@ -8,7 +8,7 @@ function canvasImage(memeURL) {
   });
   base_image.onload = function() {
     ctx.drawImage(base_image, 0, 0, gWidth, gHeight);
-    canvasWrite('hello')
+    canvasWrite("hello");
   };
 }
 

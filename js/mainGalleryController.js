@@ -69,5 +69,14 @@ function hideNav() {
 }
 function restartEditor() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  document.querySelector(".endButtons").innerHTML =''
+  document.querySelector(".endButtons").innerHTML = "";
+}
+
+function getFile(elFile) {
+  let reader = new FileReader();
+
+  reader.onloadend = function() {
+    showEditor(reader.result);
+  };
+  reader.readAsDataURL(elFile.files[0]);
 }

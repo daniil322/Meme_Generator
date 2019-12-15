@@ -12,10 +12,11 @@ body {
   background-image: url("../img/5.jpg");
 }
 header {
+  z-index: 9;
   position: fixed;
   height: 15vh;
   width: 100%;
-  background: rgba(101, 94, 93, 0.637);
+  background:rgb(31, 127, 188)
 }
 
 /* nav */
@@ -133,11 +134,10 @@ div button {
   cursor: pointer;
 }
 
-
-.colorTxt{
-font-size: 2rem;
-margin: 0;
-cursor: pointer;
+.colorTxt {
+  font-size: 2rem;
+  margin: 0;
+  cursor: pointer;
 }
 .color {
   display: none;
@@ -235,7 +235,7 @@ about {
   text-align: center;
 }
 
-.bluebackground{
+.bluebackground {
   background-color: cornflowerblue;
 }
 /* nice input */

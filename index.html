@@ -25,13 +25,12 @@
 <main>
     <div class="flex flex-wrap">
             <div class="searchBox">
-
-                    <input class="searchInput"type="text" name=""oninput="searchMemes(this)" placeholder="Search">
-                    <button class="searchButton" href="#">
-                        <i class="material-icons">
-                        </i>
-                    </button>
-                </div>
+                <input class="searchInput"type="text" name=""oninput="searchMemes(this)" placeholder="Search">
+                <button class="searchButton" href="#">
+                    <i class="material-icons">
+                    </i>
+                </button>
+            </div>
             <ul class="flex flex-wrap list">
                 <li class="quickSearch"  onclick="searchMemes('cute')" >cute</li>
                 <li class="quickSearch" onclick="searchMemes('toy')" >toy</li>
@@ -40,6 +39,7 @@
                 <li class="quickSearch" onclick="searchMemes('putin')" >putin</li>
                 <li class="quickSearch" onclick="searchMemes('obama')" >obama</li>
             </ul>
+            <input class="fb-container" type="file" onchange="getFile(this)" id="Files">
 </div>
 <content>
     <div class="content flex flex-wrap">
@@ -54,7 +54,7 @@
     <div class="form flexCoulmn flex-wrap">
         <div class="flex flex-wrap">
         <div class="flex flexCoulmn">
-        <input name="text" class="text width75" placeholder="Click on the word" class="marginTop" type="text" oninput="changeDraw(this)" >
+        <input name="txt" class="text width75" placeholder="Click on the word" class="marginTop" type="text" oninput="changeDraw(this)" >
         </div>
     </div>
         <div class="flex spaceEvenly flex-wrap">
